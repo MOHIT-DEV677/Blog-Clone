@@ -17,4 +17,15 @@ const addBlog=async (req,res)=>{
         })
     }
 }
+const blogFeed=async (req,res)=>{
+    try{
+        
+    }
+    catch(err){
+        res.json({
+            success:true,
+            message:err.message ||"something went wrong",
+        })
+    }
+}
 module.exports={addBlog};

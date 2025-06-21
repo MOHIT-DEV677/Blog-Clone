@@ -4,7 +4,7 @@
     <!-- -auth/logout/ -->
 # profile router
     <!-- -profile/profileview -->
-    -profile/myblog
+    <!-- -profile/myblog -->
     -profile/followers
     -profile/following
 # blog router
@@ -12,4 +12,4 @@
     -blog/like/
     -blog/dislike/
     -blog/comment/
-    -blog/addblog/
+    <!-- -blog/addblog/ -->
