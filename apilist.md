@@ -8,7 +8,7 @@
     -profile/followers
     -profile/following
 # blog router
-    -/blog/feed/
+    <!-- -/blog/feed/ -->
     -blog/like/
     -blog/dislike/
     -blog/comment/
