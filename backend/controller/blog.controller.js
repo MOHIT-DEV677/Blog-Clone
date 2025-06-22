@@ -1,5 +1,6 @@
 const Blog=require('../models/blogSchema');
 const Status = require('../models/statusSchema');
+const Comment=require('../models/CommentSchema');
 const addBlog=async (req,res)=>{
     try{
     const {title,description}=req.body;
@@ -76,4 +77,30 @@ const status=async (req,res)=>{
         })
     }
 }
-module.exports={addBlog,blogFeed,status};
+const comment=async (req,res)=>{
+    try{
+    const {blogId,comment}=req.body;
+    if(comment.trim()!==""){
+        const com=new Comment({
+            blogId:blogId,
+            userId:req.user._id,
+            Comment:comment,
+        })
+        await com.save();
+        return res.json({
+            success:true,
+            message:"comment can be entered successfully",
+            data:com,
+        })
+    }
+    else{
+        throw new Error("enter the valid comment");
+    }
+}catch(err){
+    res.json({
+        success:false,
+        message:err.message || "something went wrong",
+    })
+}
+}
+module.exports={addBlog,blogFeed,status,comment};
