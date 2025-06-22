@@ -1,7 +1,7 @@
 const User = require("../models/userSchema");
 const validate=require("validator");
 const bcrypt=require("bcrypt");
-const express=require('express');
+// const express=require('express');
 const jwt=require('jsonwebtoken');
 const validatesignUp = async (req,res,next)=>{
     try{

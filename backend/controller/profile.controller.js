@@ -8,7 +8,6 @@ const profileView=async (req,res)=>{
     if(!user){
         throw new Error("user is not found");
     }
-    console.log(req.user);
     res.json({
         success:true,
         message:"profile is get successfully",

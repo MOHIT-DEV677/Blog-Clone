@@ -1,4 +1,5 @@
 const Blog=require('../models/blogSchema');
+const Status = require('../models/statusSchema');
 const addBlog=async (req,res)=>{
     try{
     const {title,description}=req.body;
@@ -37,4 +38,42 @@ const blogFeed=async (req,res)=>{
         })
     }
 }
-module.exports={addBlog,blogFeed};
+const status=async (req,res)=>{
+    try{
+    const {blogid}=req.body;
+    const status=req.params.status;
+    const fromid=req.user._id;
+    const user=await Status.findOne({fromUserid:fromid},{Blogid:blogid});
+    if(status==='null'){
+        if(user){
+            await Status.deleteOne({fromUserid:fromid,Blogid:blogid});
+        }
+        return res.json({
+            message:"status is deleted",
+        })
+    }
+    if(!user){
+        const newstatus=new Status({
+            fromUserid:fromid,
+            Blogid:blogid,
+            status:status,
+        })
+        await newstatus.save();
+    }
+    else{
+        user.status=status;
+        user.save();
+    }
+    res.json({
+        success:true,
+        message:`${status} is applied successfully`,
+        data:user,
+    })
+    }catch(err){
+        res.json({
+            success:false,
+            message:err.message || 'something went wrong',
+        })
+    }
+}
+module.exports={addBlog,blogFeed,status};
