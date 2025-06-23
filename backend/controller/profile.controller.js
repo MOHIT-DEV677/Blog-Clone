@@ -37,4 +37,26 @@ const myBlog=async (req,res)=>{
     })
 }
 }
-module.exports={profileView,myBlog}
+const editProfile=async (req,res)=>{
+    try{
+        const ALLOWED_UPDATES=['userName','profileurl','skills','gender','about'];
+        const loggedInuser=req.user;
+        Object.keys(loggedInuser).every((key)=>{
+            if(ALLOWED_UPDATES.includes(key)){
+                loggedInuser[key]=req.body[key];
+            }
+        })
+        await loggedInuser.save();
+        res.json({
+            success:true,
+            message:"profile is saved successfully",
+            data:loggedInuser
+        })
+    }catch(err){
+        res.json({
+            success:true,
+            message:err.message || "something went wrong",
+        })
+    }
+}
+module.exports={profileView,myBlog,editProfile}

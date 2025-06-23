@@ -38,6 +38,7 @@ const blogFeed=async (req,res)=>{
             message:err.message ||"something went wrong",
         })
     }
+    
 }
 const status=async (req,res)=>{
     try{

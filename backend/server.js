@@ -9,9 +9,11 @@ app.use(express.json());
 const authRouter=require('./routes/auth.route.js');
 const blogRouter=require('./routes/blog.route');
 const profileRouter=require('./routes/profile.route.js');
+const FollowRouter=require('./routes/follow.route.js');
 app.use("/",authRouter);
 app.use("/",blogRouter);
 app.use("/",profileRouter);
+app.use("/",FollowRouter);
 connectDB()
 .then(()=>{
     console.log("database is connected successfully");
