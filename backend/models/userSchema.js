@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcrypt');
+require("dotenv").config();
 const userSchema=new mongoose.Schema({
     userName:{
         type:String,
@@ -36,7 +37,7 @@ const userSchema=new mongoose.Schema({
 userSchema.methods.getJWT=async function(){
     const user=this;
     const password=user.password;
-    const token=jwt.sign({ _id: user._id }, "BLOG@123", { expiresIn: '7d' });
+    const token=jwt.sign({ _id: user._id },process.env.JWT_KEY, { expiresIn: '7d' });
     return token;
 }
 userSchema.methods.validation=async function(passwordByUser){

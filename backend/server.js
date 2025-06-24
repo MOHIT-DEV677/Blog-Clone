@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express=require("express");
 const cors=require("cors");
 const connectDB=require("./database/database");
@@ -15,12 +16,12 @@ app.use("/",blogRouter);
 app.use("/",profileRouter);
 app.use("/",FollowRouter);
 connectDB()
-.then(()=>{
-    console.log("database is connected successfully");
-    app.listen("3000",()=>{
-        console.log("server is running on port "+3000);
-    })
+.then(() => {
+  console.log("database is connected successfully");
+  app.listen(process.env.SERVER_PORT_NUM, () => {
+    console.log("server is running on port " + process.env.SERVER_PORT_NUM);
+  });
 })
-.catch((err)=>{
-    console.log("database is failed to connect");
-})
+.catch((err) => {
+  console.log("database is failed to connect");
+});

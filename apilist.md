@@ -5,11 +5,12 @@
 # profile router
     <!-- -profile/profileview -->
     <!-- -profile/myblog -->
-    -profile/followers
-    -profile/following
+    <!-- -profile/followers -->
+    <!-- -profile/following -->
+    <!-- -/editprofile -->
 # blog router
     <!-- -/blog/feed/ -->
     <!-- -blog/like/ -->
     <!-- -blog/dislike/ -->
-    -blog/comment/
+    <!-- -blog/comment/ -->
     <!-- -blog/addblog/ -->

@@ -2,6 +2,7 @@ const User = require("../models/userSchema");
 const validate=require("validator");
 const bcrypt=require("bcrypt");
 // const express=require('express');
+require("dotenv").config();
 const jwt=require('jsonwebtoken');
 const validatesignUp = async (req,res,next)=>{
     try{
@@ -33,7 +34,7 @@ const validatelogIn=async (req,res,next)=>{
     if(!token){
         throw new Error("please login");
     }
-    const decoded=jwt.verify(token,'BLOG@123');
+    const decoded=jwt.verify(token,process.env.JWT_KEY);
     const {_id}=decoded;
     const user=await User.findById({_id});
     if(!user){
