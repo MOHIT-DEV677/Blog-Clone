@@ -1,14 +1,18 @@
 require("dotenv").config();
 const express=require("express");
 const cors=require("cors");
-const connectDB=require("./database/database");
+const connectDB=require("./database/database.js");
 const app=express();
 const cookieParser=require('cookie-parser');
+app.use(cors({
+  origin:process.env.CLIENT_LINK,
+  credentials:true
+}));
 app.use(cookieParser());
 app.use(express());
 app.use(express.json());
 const authRouter=require('./routes/auth.route.js');
-const blogRouter=require('./routes/blog.route');
+const blogRouter=require('./routes/blog.route.js');
 const profileRouter=require('./routes/profile.route.js');
 const FollowRouter=require('./routes/follow.route.js');
 app.use("/",authRouter);
