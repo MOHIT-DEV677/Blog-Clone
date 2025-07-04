@@ -39,13 +39,15 @@ const myBlog=async (req,res)=>{
 }
 const editProfile=async (req,res)=>{
     try{
-        const ALLOWED_UPDATES=['userName','profileurl','skills','gender','about'];
+        const ALLOWED_UPDATES=['userName','profileurl','skills','about'];
         const loggedInuser=req.user;
-        Object.keys(loggedInuser).every((key)=>{
-            if(ALLOWED_UPDATES.includes(key)){
-                loggedInuser[key]=req.body[key];
-            }
-        })
+         Object.keys(req.body).forEach((key) => {
+      if (ALLOWED_UPDATES.includes(key)) {
+        if(req.body[key]!==""){
+        loggedInuser[key] = req.body[key];
+        }
+      }
+    });
         await loggedInuser.save();
         res.json({
             success:true,

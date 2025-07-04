@@ -21,11 +21,11 @@ const addBlog=async (req,res)=>{
 const blogFeed=async (req,res)=>{
     try{
         const id=req.user._id;
-        const blogs=await Blog.find({});
+        const blogs=await Blog.find({}).populate('postedBy','userName profileurl');
         if(!blogs){
             throw new Error("no blogs found");
         }
-        const allBlog=blogs.filter(post=>post.postedBy.toString()!==id.toString());
+        const allBlog=blogs.filter(post=>post.postedBy._id.toString()!==id.toString());
         res.json({
             success:true,
             message:"display all blogs",

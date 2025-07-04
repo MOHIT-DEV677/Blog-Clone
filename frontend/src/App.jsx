@@ -7,15 +7,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Feed from './components/Feed'
 import {Provider} from 'react-redux'
 import Login from './components/Login'
+import Profile from './components/Profile'
 function App() {
   return (
     <>
     <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login/>}/>
         <Route path="/" element={<Body/>}>
+          <Route path="/login" element={<Login/>}/>
           <Route path='/' element={<Feed/>}/>
+          <Route path='/profile' element={<Profile/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
