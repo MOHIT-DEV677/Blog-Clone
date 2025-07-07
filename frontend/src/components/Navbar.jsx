@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import Profile from './Profile';
-
+import axios from 'axios';
+import { removedata } from '../store/userSlice';
 const Navbar = () => {
   const userdata=useSelector((state)=>state.user);
+  const dispatch=useDispatch();
   const [login,islogin]=useState(true);
+  const navigate=useNavigate();
+  const logout=async (req,res)=>{
+    try{
+      const data=await axios.post('http://localhost:3000/logout',{},{withCredentials:true});
+      dispatch(removedata(userdata));
+      navigate('/login');
+    }catch(err){
+      console.log(err.message);
+    }
+  }
   useEffect(()=>{
       if(!userdata){
         islogin(false);
@@ -16,7 +28,7 @@ const Navbar = () => {
     <>
       <div className="navbar bg-base-300 shadow-sm">
   <div className="flex-1">
-    <a className="btn btn-ghost text-xl">Blogify</a>
+    <Link to="/" className="btn btn-ghost text-xl">Blogify</Link>
   </div>
   {login && <div className="flex gap-2">
     <div className="dropdown dropdown-end">
@@ -36,10 +48,10 @@ const Navbar = () => {
             <span className="badge">New</span>
           </Link>
         </li>
-        <li><a>Followers</a></li>
-        <li><a>Following</a></li>
-        <li><a>My blog</a></li>
-        <li><a>Logout</a></li>
+        <li><Link to="/followers">Followers</Link></li>
+        <li><Link to="/following">Following</Link></li>
+        <li><Link to="/myblog">My blog</Link></li>
+        <li><a onClick={logout}>Logout</a></li>
       </ul>
     </div>
   </div>}

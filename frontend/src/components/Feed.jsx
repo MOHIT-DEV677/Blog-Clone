@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addBlog } from '../store/blogSlice'
 const Feed = () => {
   const dispatch=useDispatch();
-  const blogdata=useSelector((state)=>state.blog[0]);
+  const blogdata=useSelector((state)=>state.blog.nblog);
  const getBlog=async()=>{
     try{
      const data=await axios.get('http://localhost:3000/feed',{withCredentials:true});

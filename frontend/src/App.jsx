@@ -8,6 +8,9 @@ import Feed from './components/Feed'
 import {Provider} from 'react-redux'
 import Login from './components/Login'
 import Profile from './components/Profile'
+import Followers from './components/Followers'
+import Following from './components/Following'
+import MyBlog from './components/myBlog'
 function App() {
   return (
     <>
@@ -18,7 +21,10 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path='/' element={<Feed/>}/>
           <Route path='/profile' element={<Profile/>}/>
-        </Route>
+          <Route path='/followers' element={<Followers/>}/>
+          <Route path='/following' element={<Following/>}/>
+          <Route path='/myblog' element={<MyBlog/>}/>
+        </Route> 
       </Routes>
     </BrowserRouter>
     </Provider>

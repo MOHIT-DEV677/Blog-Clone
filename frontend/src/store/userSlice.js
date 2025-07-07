@@ -6,8 +6,11 @@ const userSlice=createSlice({
     reducers:{
         userdata:(state,action)=>{
             return action.payload
+        },
+        removedata:(state,action)=>{
+            return null;
         }
     }
 });
-export const {userdata}=userSlice.actions;
+export const {userdata,removedata}=userSlice.actions;
 export default userSlice.reducer;

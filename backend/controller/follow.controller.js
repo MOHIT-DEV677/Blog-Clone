@@ -5,6 +5,8 @@ const followRequest=async (req,res)=>{
         const Userid=req.params.Userid;
         const touserid=new mongoose.Types.ObjectId(Userid);
         const status=req.body.status;
+        const existing=await Follow.findOne({fromUserid:req.user._id},{toUserid:touserid});
+        if(!existing){
         const user=new Follow({
             fromUserid:req.user._id,
             toUserid:touserid,
@@ -16,6 +18,8 @@ const followRequest=async (req,res)=>{
             message:'follow the user successfully',
             data:user,
         })
+    }
+    else throw new Error("already request found");
     }catch(err){
         res.json({
             success:false,
@@ -26,7 +30,7 @@ const followRequest=async (req,res)=>{
 const Follower=async (req,res)=>{
     try{
         const userid=req.user._id;
-        const User=await Follow.find({toUserid:userid});
+        const User=await Follow.find({toUserid:userid}).populate('fromUserid','userName profileurl');
         if(User.length===0){
             throw new Error("there is no follower found");
         }
@@ -45,7 +49,7 @@ const Follower=async (req,res)=>{
 const Following=async (req,res)=>{
     try{
         const userid=req.user._id;
-        const data=await Follow.find({fromUserid:userid});
+        const data=await Follow.find({fromUserid:userid}).populate('toUserid','userName profileurl');
         if(data.length===0){
             throw new Error("there is no following user");
         }

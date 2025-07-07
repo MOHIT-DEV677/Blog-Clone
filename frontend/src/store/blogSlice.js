@@ -1,15 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 const blogSlice=createSlice({
     name:'blog',
-    initialState:[],
+    initialState:{
+        nblog:[],
+        myblog:[]
+    },
     reducers:{
         addBlog:(state,action)=>{
-            return [...state,action.payload];
+            state.nblog=action.payload;
         },
         removeBlog:(state,action)=>{
-            return state.filter((blog)=>blog._id!==action.payload._id);
+            state.nblog=state.nblog.filter((blog)=>blog._id!==action.payload._id);
+        },
+        addmyblog:(state,action)=>{
+            state.myblog=action.payload;
         }
     }
 });
-export const {addBlog,removeBlog}=blogSlice.actions;
+export const {addBlog,removeBlog,addmyblog}=blogSlice.actions;
 export default blogSlice.reducer;

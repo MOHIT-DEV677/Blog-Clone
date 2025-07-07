@@ -23,8 +23,8 @@ const profileView=async (req,res)=>{
 const myBlog=async (req,res)=>{
     try{
     const postedby=req.user._id;
-    const users=await Blog.find({});
-    const postedBlog=users.filter(post=>post.postedBy.toString()===postedby.toString());
+    const users=await Blog.find({}).populate('postedBy','userName profileurl');
+    const postedBlog=users.filter(post=>post.postedBy._id.toString()===postedby.toString());
     res.json({
         success:true,
         message:"this is your blog",

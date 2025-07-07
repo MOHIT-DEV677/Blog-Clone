@@ -4,10 +4,12 @@ const FollowSchema=new mongoose.Schema({
     fromUserid:{
         type:Schema.Types.ObjectId,
         required:true,
+        ref:'User'
     },
     toUserid:{
         type:Schema.Types.ObjectId,
         required:true,
+        ref:'User'
     },
     status:{
         type:String,
@@ -15,7 +17,7 @@ const FollowSchema=new mongoose.Schema({
             values:['following'],
             message:"this is not valid status",
         },
-        requied:true,
+        required:true,
     }
 },{timestamps:true})
 
