@@ -104,4 +104,23 @@ const comment=async (req,res)=>{
     })
 }
 }
-module.exports={addBlog,blogFeed,status,comment};
+const getcomment=async (req,res)=>{
+    try{
+    const data=await Comment.find({}).populate('userId','profileurl');
+    if(!data){
+        throw new Error("no comments found");
+    }
+    console.log(data);
+    res.json({
+        success:true,
+        message:"data can be sent",
+        data:data
+    })
+    }catch(err){
+        res.json({
+        success:false,
+        message:err.message,
+    })
+    }
+}
+module.exports={addBlog,blogFeed,status,comment,getcomment};
