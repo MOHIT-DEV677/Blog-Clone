@@ -54,7 +54,7 @@ const Feed = () => {
                 </div>
               </div>
             </div>
-            {comment && userpost._id===data._id && <div><Comment data={userpost}/>
+            {comment && userpost._id===data._id && <div><Comment data={userpost} file={data._id}/>
                     </div>}
           </div>
         ))

@@ -88,10 +88,11 @@ const comment=async (req,res)=>{
             Comment:comment,
         })
         await com.save();
+        const filcom=await Comment.findById(com._id).populate('userId','profileurl');
         return res.json({
             success:true,
             message:"comment can be entered successfully",
-            data:com,
+            data:filcom,
         })
     }
     else{
