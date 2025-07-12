@@ -8,8 +8,8 @@ import { setComments } from '../store/commentSlice';
 const Comment = (props) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comment);
-  const [showcomment,setshowcomment]=useState(false);
-
+  // const [showcomment,setshowcomment]=useState(false);
+  const [showpost,setshowpost]=useState(false);
 const getComments = async () => {
   const res = await axios.get('http://localhost:3000/getcomment', { withCredentials: true });
   if (res.data.success) {
@@ -55,10 +55,13 @@ console.log("All comments:", comments);
         <p className="text-sm text-gray-500 italic mb-4">No comments yet.</p>
       )}
       <div className="text-right mt-4">
-        <button className="btn btn-primary" onClick={()=>setshowcomment(true)}>Add Comment</button>
+        <button className="btn btn-primary" onClick={()=>{
+          // setshowcomment(true);
+          setshowpost(true);
+        }}>Add Comment</button>
       </div>
       <div>
-        {showcomment && <Addcomment data={props.file}/>}
+        {showpost && <Addcomment data={props.file} showp={setshowpost}/>}
       </div>
     </div>
   );

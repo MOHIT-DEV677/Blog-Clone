@@ -20,19 +20,21 @@ const Addcomment = (props) => {
     if (commentList.data.success) {
       dispatch(setComments(commentList.data.data));
     }
-
+    props.showp(false);
   } catch (err) {
     console.log(err.message || "something went wrong");
   }
 };
   return (
-    <div className="space-y-2">
+    <>
+    {props.showp && <div className="space-y-2">
       <textarea className="textarea textarea-bordered w-full" placeholder="Write your comment..." onChange={(e)=>setcomment(e.target.value)}></textarea>
       
       <div className="text-right">
         <button className="btn btn-primary" onClick={postcomment}>Post</button>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 
