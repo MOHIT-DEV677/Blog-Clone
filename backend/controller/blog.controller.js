@@ -110,7 +110,6 @@ const getcomment=async (req,res)=>{
     if(!data){
         throw new Error("no comments found");
     }
-    console.log(data);
     res.json({
         success:true,
         message:"data can be sent",
