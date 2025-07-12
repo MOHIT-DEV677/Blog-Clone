@@ -5,6 +5,7 @@ import {useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 const myBlog = () => {
   const dispatch=useDispatch();
+  const comments = useSelector((state) => state.comment);
   const file=useSelector((state)=>state.blog.myblog);
   const getdata=async (req,res)=>{
     try{
@@ -38,6 +39,7 @@ const myBlog = () => {
         {data.description}
       </p>
     </div>
+    
   </div>
 </div>
           );

@@ -5,7 +5,7 @@ const followRequest=async (req,res)=>{
         const Userid=req.params.Userid;
         const touserid=new mongoose.Types.ObjectId(Userid);
         const status=req.body.status;
-        const existing=await Follow.findOne({fromUserid:req.user._id},{toUserid:touserid});
+        const existing=await Follow.findOne({fromUserid:req.user._id,toUserid:touserid});
         if(!existing){
         const user=new Follow({
             fromUserid:req.user._id,

@@ -3,19 +3,17 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { addBlog } from '../store/blogSlice'
 import Comment from './Comment'
-
 const Feed = () => {
   const dispatch = useDispatch();
   const [comment, setComment] = useState(false);
   const [userpost, setUserpost] = useState(null);
-
+  const [foll,setfoll]=useState();
   const discomment = (data) => {
     setComment(true);
     setUserpost(data);
   }
 
   const blogdata = useSelector((state) => state.blog.nblog);
-
   const getBlog = async () => {
     try {
       const data = await axios.get('http://localhost:3000/feed', { withCredentials: true });
@@ -27,7 +25,15 @@ const Feed = () => {
       console.error(err);
     }
   }
-
+  const followreq=async (userid)=>{
+    try{const data=await axios.post(`http://localhost:3000/follow/${userid}`,{status:'following'},{withCredentials:true});
+    if(data){
+      throw new Error("follow req does not send");
+    }
+  }catch(err){
+      console.log(err.message || 'something went wrong');
+  }
+  }
   useEffect(() => {
     getBlog();
   }, []);
@@ -49,7 +55,7 @@ const Feed = () => {
                 <h2 className="card-title">{data.title}</h2>
                 <p className="text-sm line-clamp-4">{data.description}</p>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">follow</button>
+                  <button className="btn btn-primary" onClick={()=>followreq(data.postedBy._id)}>follow</button>
                   <button className="btn btn-primary" onClick={() => discomment(data)}>comment</button>
                 </div>
               </div>

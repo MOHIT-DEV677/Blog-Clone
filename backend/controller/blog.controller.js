@@ -25,11 +25,10 @@ const blogFeed=async (req,res)=>{
         if(!blogs){
             throw new Error("no blogs found");
         }
-        const allBlog=blogs.filter(post=>post.postedBy._id.toString()!==id.toString());
         res.json({
             success:true,
             message:"display all blogs",
-            data:allBlog,
+            data:blogs,
         })
     }
     catch(err){

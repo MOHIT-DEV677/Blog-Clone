@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 const Profile = () => {
   const dispatch=useDispatch();
   const user=useSelector((state)=>state.user);
-  const [name,setname]=useState("");
-  const [profile,setprofile]=useState("");
-  const [skills,setskills]=useState("");
-  const [about,setabout]=useState("");
+  const [name,setname]=useState("" || user?.userName);
+const [profile,setprofile]=useState("" || user?.profileurl);
+  const [skills,setskills]=useState("" || user?.skills);
+  const [about,setabout]=useState("" || user?.about);
   const editprofile=async ()=>{
     try{
     const data=await axios.patch('http://localhost:3000/editprofile',{
@@ -59,8 +59,8 @@ const Profile = () => {
         <img src={user.profileurl} alt="Profile" />
       </figure>
       <div className="card-body flex flex-col justify-between">
-        <h2 className="card-title">Card Title</h2>
-        <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+        <h2 className="card-title">{user.userName}</h2>
+        <p>{user.about}</p>
       </div>
     </div>
   </div>
